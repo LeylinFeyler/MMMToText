@@ -1,20 +1,190 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:MMMToText.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="MMMToText.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="MMMToText">
+<Window
+    x:Class="MMMToText.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MMMToText.ViewModels"
+    Title="MMMToText"
+    Width="900"
+    Height="450"
+    x:DataType="vm:MainWindowViewModel"
+    Background="White"
+    CanResize="False"
+    CornerRadius="20"
+    Icon="/Assets/logo.png"
+    SizeToContent="WidthAndHeight"
+    mc:Ignorable="d">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
+        <vm:MainWindowViewModel />
     </Design.DataContext>
+    <Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="Iosevka" />
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+        </Style>
+        <Style Selector="RadioButton">
+            <Setter Property="FontFamily" Value="Iosevka" />
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <!-- <Setter Property="FontSize" Value="12" /> -->
+        </Style>
+        <Style Selector="Border">
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+        <Style Selector="RadioButton:pointerover">
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Window.Styles>
 
+    <Grid Background="#E5D9F2">
+        <Border
+            Width="800"
+            Margin="50,50,50,50"
+            Background="#F5EFFF">
+            <StackPanel>
+                <Grid VerticalAlignment="Top" ColumnDefinitions="Auto,*">
+                    <TextBlock
+                        Grid.Column="1"
+                        Margin="0,25,0,25"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Text="Видобувач тексту з мальописів" />
+                </Grid>
+                <Rectangle Height="2" Fill="LightGray" />
+                <Grid
+                    Height="230"
+                    VerticalAlignment="Center"
+                    ColumnDefinitions="*,*">
+                    <Grid
+                        Grid.Column="0"
+                        Width="380"
+                        Margin="0,10,0,10">
+                        <Grid RowDefinitions="*,4*">
+                            <TextBlock
+                                Grid.Row="0"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                FontWeight="Bold"
+                                Text="Вибрати сторінки" />
+                            <Border Grid.Row="1">
+                                <StackPanel VerticalAlignment="Center">
+                                    <Image
+                                        Width="50"
+                                        Height="50"
+                                        Source="avares://MMMToText/Assets/upload.png" />
+                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                        <Button
+                                            Width="210"
+                                            Height="20"
+                                            Padding="0"
+                                            HorizontalAlignment="Center"
+                                            Background="#F5EFFF"
+                                            Click="UploadFiles_OnClick">
+                                            <TextBlock
+                                                x:Name="btn"
+                                                HorizontalAlignment="Center"
+                                                FontSize="12"
+                                                FontWeight="Bold"
+                                                Foreground="DodgerBlue"
+                                                Text="Натисніть, щоб завантажити" />
+                                        </Button>
+                                        <TextBlock FontSize="13" Text="або перетягніть" />
+                                    </StackPanel>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        FontSize="13"
+                                        Text="png, jpg, webp, zip, rar, cbz, cbr" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        Grid.Column="1"
+                        Width="380"
+                        Margin="0,10,0,10">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Grid RowDefinitions="1*,4*">
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Margin="0,10,0,10"
+                                    VerticalAlignment="Top"
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Text="Тип контенту" />
+                                <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                                    <RadioButton
+                                        Margin="0,0,10,0"
+                                        Content="Манґа"
+                                        GroupName="ContentType"
+                                        IsChecked="true" />
+                                    <RadioButton
+                                        Margin="0,0,10,0"
+                                        Content="Манхва"
+                                        GroupName="ContentType" />
+                                    <RadioButton
+                                        Margin="0,0,10,0"
+                                        Content="Маньхва"
+                                        GroupName="ContentType" />
+                                    <RadioButton
+                                        Margin="0,0,10,0"
+                                        Content="Комікс"
+                                        GroupName="ContentType" />
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="50,0,0,0" RowDefinitions="1*,4*">
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Margin="0,10,0,10"
+                                    VerticalAlignment="Top"
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Text="Спосіб читання" />
+                                <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                                    <RadioButton
+                                        Margin="0,0,10,0"
+                                        Content="Справа наліво"
+                                        GroupName="ReadMethod"
+                                        IsChecked="true" />
+                                    <RadioButton
+                                        Margin="0,0,10,0"
+                                        Content="Зліва направо"
+                                        GroupName="ReadMethod" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <TextBlock Text="Експортувати можна в docx або в txt" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </Grid>
+                <Button
+                    Width="780"
+                    Height="30"
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Background="#91ceeb"
+                    Content="Видобути та експортувати текст"
+                    FontWeight="DemiBold"
+                    Foreground="White" 
+                    Click="ExportText_OnClick" x:Name="exportButton"/>
+                <Rectangle Height="2" Fill="LightGray" />
+                <TextBlock
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Text="© 2025 Geronimo" />
+            </StackPanel>
+        </Border>
+    </Grid>
 </Window>
