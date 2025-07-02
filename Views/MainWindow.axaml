@@ -46,11 +46,10 @@
 
     </Window.Styles>
 
-    <Grid Background="#E5D9F2">
+    <Grid>
         <Border
             Width="800"
-            Margin="50,50,50,50"
-            Background="#F5EFFF">
+            Margin="50,50,50,50">
             <StackPanel>
                 <Grid VerticalAlignment="Top" ColumnDefinitions="Auto,*">
                     <TextBlock
@@ -90,7 +89,7 @@
                                             Height="20"
                                             Padding="0"
                                             HorizontalAlignment="Center"
-                                            Background="#F5EFFF"
+                                            Background="white"
                                             Click="UploadFiles_OnClick">
                                             <TextBlock
                                                 x:Name="btn"
